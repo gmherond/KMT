@@ -9,6 +9,7 @@
 // @grant        none
 // @run-at       document-start
 // @require      http://code.jquery.com/jquery-3.7.1.min.js
+// @downloadURL  https://raw.githubusercontent.com/gmherond/KMT/refs/heads/main/KronosModernThemeScript.js
 // ==/UserScript==
 
 let new_theme = `
