@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Kronos Modern Theme
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1.0
 // @description  Changes the visual theme of Kronos to a modern look.
 // @author       elgustav@
 // @match        https://mytime-lite.aka.corp.amazon.com/*
-// @icon         https://logosandtypes.com/wp-content/uploads/2020/07/kronos.svg
+// @icon         data:image/svg+xml;base64,PHN2ZyBpZD0ibG9nb3NhbmR0eXBlc19jb20iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1MCAxNTAuMiI+PHN0eWxlPi5zdDF7ZmlsbDojZTYzYjI5fTwvc3R5bGU+PGcgaWQ9IkxheWVyXzNfMl8iPjxnIGlkPSJMYXllcl8yXzFfIj48cGF0aCBpZD0iTGF5ZXJfMyIgZD0iTTAgLjJoMTUwdjE1MEgwVi4yeiIgZmlsbD0ibm9uZSIvPjwvZz48L2c+PGcgaWQ9Imtyb25vcyI+PHBhdGggY2xhc3M9InN0MSIgZD0iTTEzLjkgNjIuNWg1Mi43YzEuMiAwIDE1LjEuNyAyMC43LTcuMyA1LjktOCAyMi42LTMxLjUgMjIuNi0zMS41IDEuMi43IDEuMiAxIDIuMSAxLjYgMCAwLTI4IDM5LTI4IDM5LjMtNC45IDYuNi0xMi45IDguMi0xOS4zIDguMkgxM2MwLTMuNC4zLTYuOS45LTEwLjN6TTEzNi4xIDc0LjNjMCAxNS41LTUuNCAyOS45LTE1LjUgNDAuNEw5OCA4My41Yy0yLjEtMi44LTUuOS03LjUtMTItOS4yIDYuMS0xLjkgOS45LTYuNiAxMi05LjJsMjIuNi0zMS41YzEwLjEgMTAuNiAxNS41IDI0LjkgMTUuNSA0MC43eiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xNy45IDQ5LjZoNDUuMkM3NC45IDQ5LjYgNzcgNDYuMyA4MCA0M2MuMiAwIDE4LjQtMjUuNiAxOC40LTI1LjZzMS4yLjUgMi42IDEuMmMwIDAtMTAuNiAxNS0yNC4zIDMzLjktMi4xIDIuOC02LjEgNy41LTEzLjkgNy41SDE0LjZjMS00IDIuNC03LjYgMy4zLTEwLjR6TTI4IDMzLjhoMjUuNGM0LjUgMCA3LjEtNC4yIDguNy01LjkgMCAuMiAxMS4xLTE1LjMgMTEuMS0xNS4zLTE3LjQuMy0zMy44IDgtNDUuMiAyMS4yeiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yNS43IDM2LjdoMzQuNmM4LjIuMiAxMy4yLTYuOCAxMy4yLTYuOGwxMS44LTE2LjIgMy4xLjVTNzEgMzguNCA3MC43IDM4LjZjLTMuOCA1LjktNy44IDgtMTIuNyA4LjJIMTkuM2MuNy0xLjkgMy41LTYuNiA2LjQtMTAuMXpNMTMuOSA4NS44aDUyLjdjMS4yIDAgMTUuMS0uNSAyMC43IDcuMyA1LjkgOCAyMi42IDMxLjUgMjIuNiAzMS41IDEuMi0uNyAxLjItLjkgMi4xLTEuNiAwIDAtMjgtMzktMjgtMzkuMy00LjktNi42LTEyLjktOC4yLTE5LjMtOC4ySDEzYzAgMy40LjMgNi45LjkgMTAuM3oiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTcuOSA5OC43aDQ1LjJjMTEuOCAwIDEzLjkgMy4zIDE2LjkgNi42LjIgMCAxOC40IDI1LjYgMTguNCAyNS42czEuMi0uNSAyLjYtMS4yYzAgMC0xMC42LTE1LTI0LjMtMzMuOS0yLjEtMi44LTYuMS03LjUtMTMuOS03LjUgMCAuMi00OC4zIDAtNDguMyAwIDEgNC4xIDIuNCA3LjYgMy40IDEwLjR6TTI4IDExNC41aDI1LjRjNC41IDAgNy4xIDQuMiA4LjcgNS45bDExLjEgMTUuM2MtMTcuNC0uMy0zMy44LTgtNDUuMi0yMS4yeiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yNS43IDExMS43aDM0LjZjOC4yIDAgMTMuMiA2LjggMTMuMiA2LjhsMTEuOCAxNi4yIDMuMS0uNVM3MSAxMTAgNzAuNyAxMDkuOGMtMy44LTUuOS03LjgtOC0xMi43LTguMkgxOS4zYzEuOCAzLjUgMy45IDYuOSA2LjQgMTAuMXoiLz48L2c+PC9zdmc+
 // @grant        none
 // @run-at       document-start
 // @require      http://code.jquery.com/jquery-3.7.1.min.js
@@ -15,6 +15,10 @@
 let new_theme = `
 :root{
     color-scheme: dark;
+}
+
+html{
+    background:none !important;
 }
 
 option {
@@ -435,17 +439,7 @@ select:-internal-list-box option:checked {
     background:none !important;
 }
 
-body#kronos.login > *{
-    display:none;
-}
 
-body#kronos.login span{
-    display:block;
-}
-
-body#kronos.login:after {
-    content: "Go to Home and click on My Timecard if you're seeing this." !important;
-}
 
 #kronos h1 {
     position: absolute;
@@ -476,10 +470,32 @@ body#kronos.login:after {
 #gooselink{
     color:#c83d2b !important;
 }
+
+#kronos table.ControlLayout th, #kronos table.ControlLayout td label, #kronos table.ControlLayout th label, #kronos table.ControlLayout td label a, #kronos table.ControlLayout th label a {
+    background: transparent !important;
+}
+
+#search-field {
+  border: solid 4px #333 !important;
+  background: #161616 !important;
+  color: white !important;
+}
+
+.search-submit-wrapper{
+  border: solid 4px #333 !important;
+  background: #161616 !important;
+  color: white !important;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjhweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyOHB4IiBmaWxsPSIjZmZmZmZmIj48cGF0aCBkPSJNNzg0LTEyMCA1MzItMzcycS0zMCAyNC02OSAzOHQtODMgMTRxLTEwOSAwLTE4NC41LTc1LjVUMTIwLTU4MHEwLTEwOSA3NS41LTE4NC41VDM4MC04NDBxMTA5IDAgMTg0LjUgNzUuNVQ2NDAtNTgwcTAgNDQtMTQgODN0LTM4IDY5bDI1MiAyNTItNTYgNTZaTTM4MC00MDBxNzUgMCAxMjcuNS01Mi41VDU2MC01ODBxMC03NS01Mi41LTEyNy41VDM4MC03NjBxLTc1IDAtMTI3LjUgNTIuNVQyMDAtNTgwcTAgNzUgNTIuNSAxMjcuNVQzODAtNDAwWiIvPjwvc3ZnPg==") !important;
+  background-repeat: no-repeat !important;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-position: center;
+}
 `;
 
 let favicon = `
-<link rel="icon" href="https://logosandtypes.com/wp-content/uploads/2020/07/kronos.svg" sizes="any" type="image/svg+xml">
+<link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyBpZD0ibG9nb3NhbmR0eXBlc19jb20iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1MCAxNTAuMiI+PHN0eWxlPi5zdDF7ZmlsbDojZTYzYjI5fTwvc3R5bGU+PGcgaWQ9IkxheWVyXzNfMl8iPjxnIGlkPSJMYXllcl8yXzFfIj48cGF0aCBpZD0iTGF5ZXJfMyIgZD0iTTAgLjJoMTUwdjE1MEgwVi4yeiIgZmlsbD0ibm9uZSIvPjwvZz48L2c+PGcgaWQ9Imtyb25vcyI+PHBhdGggY2xhc3M9InN0MSIgZD0iTTEzLjkgNjIuNWg1Mi43YzEuMiAwIDE1LjEuNyAyMC43LTcuMyA1LjktOCAyMi42LTMxLjUgMjIuNi0zMS41IDEuMi43IDEuMiAxIDIuMSAxLjYgMCAwLTI4IDM5LTI4IDM5LjMtNC45IDYuNi0xMi45IDguMi0xOS4zIDguMkgxM2MwLTMuNC4zLTYuOS45LTEwLjN6TTEzNi4xIDc0LjNjMCAxNS41LTUuNCAyOS45LTE1LjUgNDAuNEw5OCA4My41Yy0yLjEtMi44LTUuOS03LjUtMTItOS4yIDYuMS0xLjkgOS45LTYuNiAxMi05LjJsMjIuNi0zMS41YzEwLjEgMTAuNiAxNS41IDI0LjkgMTUuNSA0MC43eiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xNy45IDQ5LjZoNDUuMkM3NC45IDQ5LjYgNzcgNDYuMyA4MCA0M2MuMiAwIDE4LjQtMjUuNiAxOC40LTI1LjZzMS4yLjUgMi42IDEuMmMwIDAtMTAuNiAxNS0yNC4zIDMzLjktMi4xIDIuOC02LjEgNy41LTEzLjkgNy41SDE0LjZjMS00IDIuNC03LjYgMy4zLTEwLjR6TTI4IDMzLjhoMjUuNGM0LjUgMCA3LjEtNC4yIDguNy01LjkgMCAuMiAxMS4xLTE1LjMgMTEuMS0xNS4zLTE3LjQuMy0zMy44IDgtNDUuMiAyMS4yeiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yNS43IDM2LjdoMzQuNmM4LjIuMiAxMy4yLTYuOCAxMy4yLTYuOGwxMS44LTE2LjIgMy4xLjVTNzEgMzguNCA3MC43IDM4LjZjLTMuOCA1LjktNy44IDgtMTIuNyA4LjJIMTkuM2MuNy0xLjkgMy41LTYuNiA2LjQtMTAuMXpNMTMuOSA4NS44aDUyLjdjMS4yIDAgMTUuMS0uNSAyMC43IDcuMyA1LjkgOCAyMi42IDMxLjUgMjIuNiAzMS41IDEuMi0uNyAxLjItLjkgMi4xLTEuNiAwIDAtMjgtMzktMjgtMzkuMy00LjktNi42LTEyLjktOC4yLTE5LjMtOC4ySDEzYzAgMy40LjMgNi45LjkgMTAuM3oiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTcuOSA5OC43aDQ1LjJjMTEuOCAwIDEzLjkgMy4zIDE2LjkgNi42LjIgMCAxOC40IDI1LjYgMTguNCAyNS42czEuMi0uNSAyLjYtMS4yYzAgMC0xMC42LTE1LTI0LjMtMzMuOS0yLjEtMi44LTYuMS03LjUtMTMuOS03LjUgMCAuMi00OC4zIDAtNDguMyAwIDEgNC4xIDIuNCA3LjYgMy40IDEwLjR6TTI4IDExNC41aDI1LjRjNC41IDAgNy4xIDQuMiA4LjcgNS45bDExLjEgMTUuM2MtMTcuNC0uMy0zMy44LTgtNDUuMi0yMS4yeiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yNS43IDExMS43aDM0LjZjOC4yIDAgMTMuMiA2LjggMTMuMiA2LjhsMTEuOCAxNi4yIDMuMS0uNVM3MSAxMTAgNzAuNyAxMDkuOGMtMy44LTUuOS03LjgtOC0xMi43LTguMkgxOS4zYzEuOCAzLjUgMy45IDYuOSA2LjQgMTAuMXoiLz48L2c+PC9zdmc+" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -549,7 +565,6 @@ function goToReports{
 }
 `;
 
-
 let style = document.createElement('style');
 let headercontentdiv = document.createElement('div');
 headercontentdiv.id = "headercontentdiv";
@@ -568,8 +583,44 @@ style.innerHTML+=new_theme;
 document.head.append(style);
 document.head.append(scriptElement);
 
-$( document ).ready(function() {
+const inIframe = window.self !== window.top;
 
+console.log(inIframe);
+
+if(inIframe==false){
+    let redirect = false;
+    if(location.href!="https://mytime-lite.aka.corp.amazon.com/wfc/applications/suitenav/navigation.do?ESS=true?redirect=/wfc/applications/wtk/html/ess/timestamp.jsp"){
+        if(!location.href.startsWith("https://mytime-lite.aka.corp.amazon.com/wfcstatic/help")){
+            redirect=true;
+        }
+    }
+    if(redirect){
+        location.href="https://mytime-lite.aka.corp.amazon.com";
+    }
+}
+else{
+    if(location.href=="https://mytime-lite.aka.corp.amazon.com/wfc/applications/wpk/html/kronos-logonbody.jsp?ESS=true&url=-1511714176&from=home"){
+        localStorage.setItem("redirectTimestamp",true);
+        //document.body.innerHTML = "<span>If you are seeing this, click <a style='color:#c83d2b !important' href='https://mytime-lite.aka.corp.amazon.com/wfc/applications/mss/managerlaunch.do'>here</a> to go Home.</span>";
+        location.href="https://mytime-lite.aka.corp.amazon.com/wfc/applications/mss/managerlaunch.do";
+
+    }
+
+    if(location.href=="https://mytime-lite.aka.corp.amazon.com/wfc/applications/mss/managerlaunch.do"){
+        if(localStorage.getItem("redirectTimestamp")=="true"){
+            localStorage.setItem("redirectTimestamp",false);
+            location.href="https://mytime-lite.aka.corp.amazon.com/wfc/applications/mss/html/portal-launch.jsp?url=-1511714176&from=home";
+        }
+    }
+}
+
+
+
+$( document ).ready(function() {
+    document.getElementById("contentDiv").style="margin: 0px; padding: 0px; border: 0px; visibility: visible;";
+    if(location.href=="https://mytime-lite.aka.corp.amazon.com/wfc/applications/wpk/html/kronos-logonbody.jsp?ESS=true&url=-1511714176&from=home"){
+        document.body.innerHTML = "<span>If you are seeing this, click <a style='color:#c83d2b !important' href='https://mytime-lite.aka.corp.amazon.com/wfc/applications/mss/managerlaunch.do'>here</a> to go Home.</span>";
+    }
     if(document.getElementById("header")){
         let header = document.getElementById("header");
         header.prepend(headercontentdiv);
