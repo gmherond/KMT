@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kronos Modern Theme
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      1.2.0
 // @description  Changes the visual theme of Kronos to a modern look.
 // @author       elgustav@
 // @match        https://mytime-lite.aka.corp.amazon.com/*
@@ -11,6 +11,13 @@
 // @require      http://code.jquery.com/jquery-3.7.1.min.js
 // @downloadURL  https://raw.githubusercontent.com/gmherond/KMT/refs/heads/main/KronosModernThemeScript.js
 // ==/UserScript==
+
+/*Changelog 1.2.0 06/23/2025
+-Shortened Navbar by hiding button labels by default.
+-User can see what each navbar button does by hovering over it.
+-Removed code for rowInsert icons.
+-Added a new icon for rowInsert buttons using only css.
+*/
 
 let new_theme = `
 :root{
@@ -179,9 +186,9 @@ body{
 }
 
 #kronos #header div#globalLinks {
-    top: 0.55rem !important;
+    top: 0.375rem !important;
     color: rgb(255 255 255) !important;
-    right: 0rem !important;
+    right: 0.75rem !important;
     height: auto !important;
     padding: 0.1rem 0.1rem !important;
     border-radius: 1rem 0rem 0rem 1rem;
@@ -275,6 +282,7 @@ body{
     border-radius: 1rem;
     margin: 0.1rem;
     width: auto !important;
+	height:1.5rem;
     display: flex;
     justify-content: center;
     font-weight:600 !important;
@@ -320,7 +328,8 @@ body{
 }
 
 #kronos #moreList.Show, #kronos .basicNav.Show {
-    padding: 0;
+    padding-right: 0;
+	padding-top:0;
 }
 
 #fullScreenLine{
@@ -430,16 +439,13 @@ select:-internal-list-box option:checked {
     vertical-align: top;
 }
 
-.newRowInsertIcon{
-    width:0.9rem !important;
-    height:0.9rem !important;
-}
-
 #kronos table.ActionList a, #kronos table.ActionList a:visited, #kronos table.ActionList a:hover, #kronos table.ActionList a:active {
     background:none !important;
 }
 
-
+#kronos img.RowInsertIcon{
+	background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='15px' viewBox='0 -960 960 960' width='15px' fill='%23ffffff'%3E%3Cpath d='M216-216v-144 16-4 132Zm-.3 72q-32.7 0-52.2-19.5T144-216v-144q0-33 19.5-52.5T216-432h528q33 0 52.5 19.5T816-360H216v144h396v72H215.7Zm.3-384q-33 0-52.5-19.5T144-600v-144q0-33 19.5-52.5T216-816h528q33 0 52.5 19.5T816-744v144q0 33-19.5 52.5T744-528H216Zm0-72h528v-144H216v144Zm0 0v-144 144ZM744-84v-60h-60v-72h60v-60h72v60h60v72h-60v60h-72Z'/%3E%3C/svg%3E") !important;
+}
 
 #kronos h1 {
     position: absolute;
@@ -492,6 +498,28 @@ select:-internal-list-box option:checked {
   align-items:center;
   background-position: center;
 }
+
+.hlText{
+	scale: 0 0;
+    position: absolute;
+    background-color: #3f3f3f;
+    padding: 0.2rem 0.75rem;
+    height: 1rem;
+    border-radius: 1rem;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+	text-wrap:nowrap;
+	transform: translateY(55%);
+	transition: 0.25s transform;
+}
+
+a:hover > .hlText{
+	scale: 1 1;
+	transform: translateX(0%) translateY(99%);
+}
 `;
 
 let favicon = `
@@ -523,28 +551,19 @@ let hideshowbtn= `
 </svg>
 `;
 
-let rowInsertBtn=`
-<svg class="newRowInsertIcon" width="354" height="354" viewBox="0 0 354 354" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="354" height="354" rx="120" fill="#C83D2B"/>
-<path d="M299.01 261.01C302.33 257.691 302.33 252.309 299.01 248.99L244.917 194.896C241.597 191.576 236.215 191.576 232.896 194.896C229.576 198.215 229.576 203.597 232.896 206.917L280.979 255L232.896 303.083C229.576 306.403 229.576 311.785 232.896 315.104C236.215 318.424 241.597 318.424 244.917 315.104L299.01 261.01ZM97 263.5L293 263.5L293 246.5L97 246.5L97 263.5Z" fill="white"/>
-<path d="M123.648 165.565V57.7528H141.943V165.565H123.648ZM78.8892 120.807V102.511H186.702V120.807H78.8892Z" fill="white"/>
-<line x1="106.5" y1="222" x2="106.5" y2="260" stroke="white" stroke-width="19"/>
-</svg>
-`;
-
 let links = `
 <span id="returnHome" onclick="returnHome()" class="basicNav Show">
     <a href="/wfc/applications/mss/managerlaunch.do" onclick="return false;">
     <svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M220-180h150v-250h220v250h150v-390L480-765 220-570v390Zm-60 60v-480l320-240 320 240v480H530v-250H430v250H160Zm320-353Z"/></svg>
-        Home
+        <span class="hlText">Home</span>
     </a>
 </span>
 
-<a target="contentPane" href="/wfc/applications/wtk/html/ess/timestamp.jsp"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-80q-33 0-56.5-23.5T120-160v-480q0-33 23.5-56.5T200-720h40v-200h480v200h40q33 0 56.5 23.5T840-640v480q0 33-23.5 56.5T760-80H200Zm120-640h320v-120H320v120ZM200-160h560v-480H200v480Zm280-40q83 0 141.5-58.5T680-400q0-83-58.5-141.5T480-600q-83 0-141.5 58.5T280-400q0 83 58.5 141.5T480-200Zm0-60q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41Zm46-66 28-28-54-54v-92h-40v108l66 66Zm-46-74Z"/></svg>Timestamp</a>
-<a target="contentPane" href="/wfc/applications/mss/html/portal-launch.jsp?url=-1511714176&from=home"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>Timecard</a>
-<a target="contentPane" href="/wfc/applications/wtk/html/ess/my-reports.jsp"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v333q-19-11-39-20t-41-16v-137H520v137q-46 14-86 40t-74 63H200v160h82q11 22 22 42t24 38H200Zm0-320h240v-160H200v160Zm0-240h560v-80H200v80Zm280 200Zm0 0Zm0 0Zm0 0ZM640-40q-91 0-168-48T360-220q35-84 112-132t168-48q91 0 168 48t112 132q-35 84-112 132T640-40Zm0-80q57 0 107.5-26t82.5-74q-32-48-82.5-74T640-320q-57 0-107.5 26T450-220q32 48 82.5 74T640-120Zm0-40q-25 0-42.5-17.5T580-220q0-25 17.5-42.5T640-280q25 0 42.5 17.5T700-220q0 25-17.5 42.5T640-160Z"/></svg>Reports</a>
-<a onclick="launchHelp(&quot;/wfcstatic/help/en/wwhelp.htm&quot;); return false;" href="/wfcstatic/help/en/wwhelp.htm"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>Help</a>
-<a href="/wfc/applications/wtk/html/ess/logoff.jsp" title="" target="_top" onclick="return checkUSD()"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>Log Off</a>
+<a target="contentPane" href="/wfc/applications/wtk/html/ess/timestamp.jsp"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-80q-33 0-56.5-23.5T120-160v-480q0-33 23.5-56.5T200-720h40v-200h480v200h40q33 0 56.5 23.5T840-640v480q0 33-23.5 56.5T760-80H200Zm120-640h320v-120H320v120ZM200-160h560v-480H200v480Zm280-40q83 0 141.5-58.5T680-400q0-83-58.5-141.5T480-600q-83 0-141.5 58.5T280-400q0 83 58.5 141.5T480-200Zm0-60q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41Zm46-66 28-28-54-54v-92h-40v108l66 66Zm-46-74Z"/></svg><span class="hlText">Timestamp</span></a>
+<a target="contentPane" href="/wfc/applications/mss/html/portal-launch.jsp?url=-1511714176&from=home"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg><span class="hlText">Timecard</span></a>
+<a target="contentPane" href="/wfc/applications/wtk/html/ess/my-reports.jsp"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v333q-19-11-39-20t-41-16v-137H520v137q-46 14-86 40t-74 63H200v160h82q11 22 22 42t24 38H200Zm0-320h240v-160H200v160Zm0-240h560v-80H200v80Zm280 200Zm0 0Zm0 0Zm0 0ZM640-40q-91 0-168-48T360-220q35-84 112-132t168-48q91 0 168 48t112 132q-35 84-112 132T640-40Zm0-80q57 0 107.5-26t82.5-74q-32-48-82.5-74T640-320q-57 0-107.5 26T450-220q32 48 82.5 74T640-120Zm0-40q-25 0-42.5-17.5T580-220q0-25 17.5-42.5T640-280q25 0 42.5 17.5T700-220q0 25-17.5 42.5T640-160Z"/></svg><span class="hlText">Reports</span></a>
+<a onclick="launchHelp(&quot;/wfcstatic/help/en/wwhelp.htm&quot;); return false;" href="/wfcstatic/help/en/wwhelp.htm"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg><span class="hlText">Help</span></a>
+<a href="/wfc/applications/wtk/html/ess/logoff.jsp" title="" target="_top" onclick="return checkUSD()"><svg class="lIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#eaeaea"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg><span class="hlText">Log Off</span></a>
 `;
 
 let gooselink = `
@@ -614,8 +633,6 @@ else{
     }
 }
 
-
-
 $( document ).ready(function() {
     document.getElementById("contentDiv").style="margin: 0px; padding: 0px; border: 0px; visibility: visible;";
     if(location.href=="https://mytime-lite.aka.corp.amazon.com/wfc/applications/wpk/html/kronos-logonbody.jsp?ESS=true&url=-1511714176&from=home"){
@@ -628,13 +645,4 @@ $( document ).ready(function() {
         globalLinks.innerHTML = links;
         document.body.append(gooselinkdiv);
     }
-
-    setInterval((e)=>{
-        if(document.getElementsByClassName("RowInsertIcon")){
-            let icons = document.getElementsByClassName("RowInsertIcon");
-            if(icons.length>0){
-                icons[0].parentElement.innerHTML=rowInsertBtn;
-            }
-        }
-    },10);
 });
